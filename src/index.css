@@ -1,13 +1,65 @@
+/* src/index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: #ecf0f1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  text-align: center;
+  color: #ecf0f1;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif; /* Apply the new font here */
+
+}
+
+.app-container {
+  display: flex;
+  justify-content: space-between;
+  width: 65vw; /* 65% of the viewport's width */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+button {
+  background-color: #2980b9;
+  border: none;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #3498db;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 60%;
+  border: 1px solid #2980b9;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-bar, .search-results, .playlist {
+  background-color: #2c3e50;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
