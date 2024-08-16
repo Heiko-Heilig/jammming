@@ -106,7 +106,21 @@ const Spotify = {
     return response.json();
   },
 
-  async savePlaylist(name, trackUris, id = null) {
+  async removeTracksFromPlaylist(playlistId, trackUris) {
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${this.getAccessToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        tracks: trackUris.map(uri => ({ uri }))
+      })
+    });
+    return response.json();
+  },
+
+  async savePlaylist(name, trackUris, id = null, removedTrackUris = []) {
     const userId = await this.getCurrentUserId();
 
     if (id) {
@@ -121,6 +135,10 @@ const Spotify = {
           name: name
         })
       });
+
+      if (removedTrackUris.length > 0) {
+        await this.removeTracksFromPlaylist(id, removedTrackUris);
+      }
 
       return this.addTracksToPlaylist(id, trackUris);
     } else {
