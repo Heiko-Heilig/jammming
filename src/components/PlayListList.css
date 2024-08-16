@@ -1,0 +1,15 @@
+/* src/components/PlayListList.css */
+.playlist-list-container {
+    margin-bottom: 20px; /* Space below the pills */
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 90vb;
+  }
+  
+  .playlist-list-scroll {
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px; /* Space between pills and bottom container */
+    padding-top: 10px;
+  }
+  
