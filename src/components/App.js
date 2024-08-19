@@ -23,6 +23,7 @@ function App() {
     setPlaylistTracks(prevTracks => [...prevTracks, track]);
     setErrorMessage(''); // Clear any existing error messages
   };
+  
 
   const removeTrackFromPlaylist = (track) => {
     setPlaylistTracks(prevTracks => prevTracks.filter(savedTrack => savedTrack.id !== track.id));
@@ -62,30 +63,34 @@ function App() {
   };
 
   const selectPlaylist = async (id) => {
-    const tracks = await Spotify.getPlaylist(id);
+    const tracks = await Spotify.getPlaylist(id); // Get the latest playlist data
     const playlist = await Spotify.getUserPlaylists().then(playlists => playlists.find(pl => pl.id === id));
     
     setPlaylistId(id);
     setPlaylistName(playlist.name);
     setPlaylistTracks(tracks);
   };
-
+  
   return (
     <div>
-      <h1>Jammming</h1>
-      <SearchBar onSearch={searchSpotify} />
-      {isLoading && <p>...loading</p>}
-      <PlayListList onSelect={selectPlaylist} />
-      <div className="app-container">
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <SearchResults searchResults={searchResults} onAdd={addTrackToPlaylist} />
-        <Playlist
-          playlistName={playlistName}
-          playlistTracks={playlistTracks}
-          onRemove={removeTrackFromPlaylist}
-          onNameChange={updatePlaylistName}
-          onSave={savePlaylist}
-        />
+      <nav className="navbar">
+        <h1>Jammming</h1>
+      </nav>
+      <div className="content">
+        <SearchBar onSearch={searchSpotify} />
+        {isLoading && <p>...loading</p>}
+        <PlayListList onSelect={selectPlaylist} />
+        <div className="app-container">
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          <SearchResults searchResults={searchResults} onAdd={addTrackToPlaylist} />
+          <Playlist
+            playlistName={playlistName}
+            playlistTracks={playlistTracks}
+            onRemove={removeTrackFromPlaylist}
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
+          />
+        </div>
       </div>
     </div>
   );

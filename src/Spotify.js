@@ -120,11 +120,19 @@ const Spotify = {
     return response.json();
   },
 
-  async savePlaylist(name, trackUris, id = null, removedTrackUris = []) {
+  async savePlaylist(name, trackUris, id = null) {
     const userId = await this.getCurrentUserId();
-
+  
     if (id) {
-      // Update existing playlist
+      // Clear the existing tracks in the Spotify playlist
+      const currentTracks = await this.getPlaylist(id);
+      const currentTrackUris = currentTracks.map(track => track.uri);
+  
+      if (currentTrackUris.length > 0) {
+        await this.removeTracksFromPlaylist(id, currentTrackUris);
+      }
+  
+      // Add the new tracks from the app's state
       await fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${id}`, {
         method: 'PUT',
         headers: {
@@ -135,11 +143,7 @@ const Spotify = {
           name: name
         })
       });
-
-      if (removedTrackUris.length > 0) {
-        await this.removeTracksFromPlaylist(id, removedTrackUris);
-      }
-
+  
       return this.addTracksToPlaylist(id, trackUris);
     } else {
       // Create a new playlist

@@ -2,6 +2,28 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+.navbar {
+  width: 100%;
+  background-color: #333; /* Darker background */
+  padding: 10px 0;
+  position: fixed; /* Keep the navbar fixed at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  text-align: center;
+  color: white;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 3em;
+}
+
+/* Ensure content doesn't go under the navbar */
+.content {
+  padding-top: 60px; /* Adjust based on the navbar height */
+}
+
 
 .app-container {
   display: flex;
